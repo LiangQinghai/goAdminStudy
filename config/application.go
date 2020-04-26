@@ -9,6 +9,8 @@ var (
 	JwtConfig *jwtConfig
 
 	LogConfig *logConfig
+
+	ServerConfig *serverConfig
 )
 
 func init() {
@@ -24,6 +26,9 @@ func init() {
 	initJwtConfig(viper.Sub("jwt"))
 
 	initLogConfig(viper.Sub("log"))
+
+	initServerConf(viper.Sub("server"))
+
 }
 
 func initDataSource(source *viper.Viper) {
@@ -45,5 +50,19 @@ func initJwtConfig(source *viper.Viper) {
 func initLogConfig(source *viper.Viper) {
 	LogConfig = &logConfig{
 		fileName: source.GetString("fileName"),
+	}
+}
+
+func initServerConf(source *viper.Viper) {
+	if source == nil {
+		ServerConfig = &serverConfig{
+			port: 8888,
+			host: "0.0.0.0",
+		}
+	} else {
+		ServerConfig = &serverConfig{
+			port: source.GetInt("port"),
+			host: source.GetString("host"),
+		}
 	}
 }
