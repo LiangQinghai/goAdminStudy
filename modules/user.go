@@ -1,8 +1,8 @@
 package modules
 
 import (
-	"github.com/LiangQinghai/goAdminStudy/datasource"
 	"github.com/jinzhu/gorm"
+	"goAdminStudy/datasource"
 	"golang.org/x/crypto/bcrypt"
 	"time"
 )
@@ -28,7 +28,7 @@ func (u *User) Create() error {
 
 	u.CreatTime = time.Now()
 	u.UpdateTime = time.Now()
-	u.Status = STATUS_ENABLE
+	u.Status = StatusEnable
 
 	// 加密
 	if password, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost); err != nil {

@@ -6,9 +6,9 @@ package modules
 var (
 
 	// 正常状态
-	STATUS_ENABLE = 0
+	StatusEnable = 0
 	// 异常状态
-	STATUS_DISABLE = 1
+	StatusDisable = 1
 	// 删除
-	STATUS_DELETE = 2
+	StatusDelete = 2
 )

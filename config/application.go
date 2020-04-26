@@ -2,15 +2,14 @@ package config
 
 import "github.com/spf13/viper"
 
-type DataSource struct {
-	User     string
-	Password string
-	Host     string
-	Port     int
-	DataBase string
-}
+// 对外开放产量
+var (
+	DataSourceConf *dataSource
 
-var DataSourceConf *DataSource
+	JwtConfig *jwtConfig
+
+	LogConfig *logConfig
+)
 
 func init() {
 	viper.SetConfigName("application")
@@ -20,15 +19,31 @@ func init() {
 		panic(err)
 	}
 
-	assembleDataSource(viper.Sub("datasource"))
+	initDataSource(viper.Sub("datasource"))
+
+	initJwtConfig(viper.Sub("jwt"))
+
+	initLogConfig(viper.Sub("log"))
 }
 
-func assembleDataSource(source *viper.Viper) {
-	DataSourceConf = &DataSource{
-		User:     source.GetString("user"),
-		Password: source.GetString("password"),
-		Host:     source.GetString("host"),
-		Port:     source.GetInt("port"),
-		DataBase: source.GetString("database"),
+func initDataSource(source *viper.Viper) {
+	DataSourceConf = &dataSource{
+		user:     source.GetString("user"),
+		password: source.GetString("password"),
+		host:     source.GetString("host"),
+		port:     source.GetInt("port"),
+		dataBase: source.GetString("database"),
+	}
+}
+
+func initJwtConfig(source *viper.Viper) {
+	JwtConfig = &jwtConfig{
+		secret: source.GetString("secret"),
+	}
+}
+
+func initLogConfig(source *viper.Viper) {
+	LogConfig = &logConfig{
+		fileName: source.GetString("fileName"),
 	}
 }
