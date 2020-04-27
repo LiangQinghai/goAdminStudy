@@ -11,6 +11,7 @@ func InitRoute() *gin.Engine {
 
 	engine := gin.New()
 
+	engine.Use(gin.Logger())
 	engine.Use(middlewires.GlobalError)
 
 	//

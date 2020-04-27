@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"goAdminStudy/config"
 	"goAdminStudy/route"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -15,6 +16,9 @@ import (
 func main() {
 
 	gin.SetMode(gin.DebugMode)
+	file, _ := os.Create(config.LogConfig.GetFileName())
+	gin.DefaultWriter = io.MultiWriter(file, os.Stdout)
+	gin.ForceConsoleColor()
 
 	engine := route.InitRoute()
 
