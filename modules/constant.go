@@ -3,12 +3,12 @@ package modules
 // 常量
 
 // STATUS 状态
-var (
+const (
 
 	// 正常状态
-	StatusEnable = 0
+	StatusEnable int = iota
 	// 异常状态
-	StatusDisable = 1
+	StatusDisable
 	// 删除
-	StatusDelete = 2
+	StatusDelete
 )

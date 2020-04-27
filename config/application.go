@@ -50,6 +50,7 @@ func initJwtConfig(source *viper.Viper) {
 func initLogConfig(source *viper.Viper) {
 	LogConfig = &logConfig{
 		fileName: source.GetString("fileName"),
+		level:    source.GetString("level"),
 	}
 }
 
