@@ -11,8 +11,10 @@ func InitRoute() *gin.Engine {
 
 	engine := gin.New()
 
-	engine.Use(gin.Logger())
+	engine.Use(middlewires.LoggerMid())
 	engine.Use(middlewires.GlobalError)
+	engine.Use(middlewires.NoCache)
+	engine.Use(middlewires.Secure)
 
 	//
 	engine.GET("/ping", func(context *gin.Context) {

@@ -18,10 +18,12 @@ func init() {
 
 	if err != nil {
 		fmt.Println("log error: ", err)
+		logger.SetOutput(os.Stdout)
+	} else {
+		//logger.Out = io.MultiWriter(file, os.Stdout)
+		logger.SetOutput(io.MultiWriter(file, os.Stdout))
 	}
 
-	//logger.Out = io.MultiWriter(file, os.Stdout)
-	logger.SetOutput(io.MultiWriter(file, os.Stdout))
 	//
 	logger.SetLevel(config.LogConfig.GetLevel())
 	//
@@ -93,10 +95,10 @@ func Panic(args ...interface{}) {
 	logger.Panic(args)
 }
 
-func Panicf(args ...interface{}) {
-	logger.Panic(args)
+func Panicf(format string, args ...interface{}) {
+	logger.Panicf(format, args)
 }
 
-func Panic(args ...interface{}) {
-	logger.Panic(args)
+func Panicln(args ...interface{}) {
+	logger.Panicln(args)
 }

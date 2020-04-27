@@ -2,10 +2,10 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"goAdminStudy/config"
 	"goAdminStudy/route"
-	"io"
 	"log"
 	"net/http"
 	"os"
@@ -16,14 +16,11 @@ import (
 func main() {
 
 	gin.SetMode(gin.DebugMode)
-	file, _ := os.Create(config.LogConfig.GetFileName())
-	gin.DefaultWriter = io.MultiWriter(file, os.Stdout)
-	gin.ForceConsoleColor()
 
 	engine := route.InitRoute()
 
 	server := &http.Server{
-		Addr:    config.ServerConfig.GetHost() + ":" + string(config.ServerConfig.GetPort()),
+		Addr:    fmt.Sprintf("%s:%d", config.ServerConfig.GetHost(), config.ServerConfig.GetPort()),
 		Handler: engine,
 	}
 
