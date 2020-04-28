@@ -27,8 +27,7 @@ func LoggerMid() gin.HandlerFunc {
 		//
 		status := context.Writer.Status()
 
-		log.Infof("ClientIp: %14s ### Address: %14s ### Host: %14s ### Proto: %9s ### Uri: %s  ### Method: %6s ### Cost: %d ### Status: %3d ",
-			ip, addr, host, proto, uri, method, duration, status)
+		log.Infoln(ip, addr, host, proto, uri, method, duration, status)
 
 	}
 }
