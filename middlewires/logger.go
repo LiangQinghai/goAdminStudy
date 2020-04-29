@@ -14,7 +14,7 @@ func LoggerMid() gin.HandlerFunc {
 		context.Next()
 
 		// 请求处理时间
-		duration := start.Sub(time.Now())
+		duration := -start.Sub(time.Now())
 
 		//
 		request := context.Request

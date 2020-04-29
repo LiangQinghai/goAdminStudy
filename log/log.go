@@ -14,7 +14,7 @@ func init() {
 
 	logger = logrus.New()
 	// 日志文件配置
-	file, err := os.OpenFile(config.LogConfig.GetFileName(), os.O_APPEND|os.O_WRONLY, os.ModeAppend)
+	file, err := os.OpenFile(config.LogConfig.GetFileName(), os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.FileMode(0666))
 
 	if err != nil {
 		fmt.Println("log error: ", err)

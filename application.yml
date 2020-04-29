@@ -9,7 +9,7 @@ jwt:
   secret: helloworld
 
 log:
-  fileName: admin.log
+  fileName: ./static/admin.log
   level: debug
 
 server:

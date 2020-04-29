@@ -12,7 +12,7 @@ func CommonResult(code int, message string, data interface{}) gin.H {
 		"code":    code,
 		"message": message,
 		"data":    data,
-		"time":    time.Now().Format("2006-01-02 15:04:05:999"),
+		"time":    time.Now().Format("2006-01-02 15:04:05:1234"),
 	}
 }
 
