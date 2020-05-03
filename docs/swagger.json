@@ -1,0 +1,130 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "admin",
+        "title": "api",
+        "contact": {},
+        "license": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/adm/kafka/list": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "分页参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/utils.Page"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.KafkaConfig"
+                        }
+                    }
+                }
+            }
+        },
+        "/adm/kafka/save": {
+            "post": {
+                "description": "this is desc",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Name of the kafka config",
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.KafkaConfig"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.KafkaConfig"
+                        },
+                        "headers": {
+                            "Token": {
+                                "type": "string",
+                                "description": "token"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.KafkaConfig": {
+            "type": "object",
+            "required": [
+                "broker",
+                "name"
+            ],
+            "properties": {
+                "broker": {
+                    "type": "string"
+                },
+                "creat_time": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "update_time": {
+                    "type": "string"
+                }
+            }
+        },
+        "utils.Page": {
+            "type": "object",
+            "properties": {
+                "keyWorld": {
+                    "description": "关键字",
+                    "type": "string"
+                },
+                "pageCount": {
+                    "description": "每页数",
+                    "type": "integer"
+                },
+                "pageNo": {
+                    "description": "页码",
+                    "type": "integer"
+                },
+                "totalCount": {
+                    "description": "总数",
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

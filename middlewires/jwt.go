@@ -4,7 +4,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"goAdminStudy/config"
-	"goAdminStudy/modules"
+	"goAdminStudy/models"
 	"log"
 	"net/http"
 	"time"
@@ -18,9 +18,7 @@ type Claims struct {
 }
 
 // 加密获取token
-// @Param user 用户
-// @Return string, error
-func GenerateToken(user modules.User) (string, error) {
+func GenerateToken(user models.User) (string, error) {
 
 	now := time.Now()
 	// 过期时间
@@ -62,6 +60,12 @@ func ParseToken(token string) (*Claims, error) {
 // jwt验证
 func JwtMiddle() gin.HandlerFunc {
 	return func(c *gin.Context) {
+
+		if gin.Mode() == gin.DebugMode {
+			c.Next()
+			return
+		}
+
 		token := c.GetHeader("token")
 		log.Printf("Token from header: %s \n", token)
 

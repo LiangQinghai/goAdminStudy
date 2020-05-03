@@ -2,6 +2,9 @@ package route
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"goAdminStudy/controller"
 	"goAdminStudy/middlewires"
 	"goAdminStudy/utils"
 	"net/http"
@@ -34,6 +37,16 @@ func InitRoute() *gin.Engine {
 		taskGroup.DELETE("/delete")
 		taskGroup.PUT("/update")
 	}
+
+	kafkaGroup := authGroup.Group("/kafka")
+	{
+		kafkaController := controller.KafkaController{}
+		kafkaGroup.POST("/save", kafkaController.Add)
+		kafkaGroup.GET("/list", kafkaController.List)
+	}
+
+	//swager
+	engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	return engine
 

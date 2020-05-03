@@ -1,0 +1,85 @@
+definitions:
+  models.KafkaConfig:
+    properties:
+      broker:
+        type: string
+      creat_time:
+        type: string
+      desc:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      status:
+        type: integer
+      update_time:
+        type: string
+    required:
+    - broker
+    - name
+    type: object
+  utils.Page:
+    properties:
+      keyWorld:
+        description: 关键字
+        type: string
+      pageCount:
+        description: 每页数
+        type: integer
+      pageNo:
+        description: 页码
+        type: integer
+      totalCount:
+        description: 总数
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: admin
+  license: {}
+  title: api
+  version: "1.0"
+paths:
+  /adm/kafka/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 分页参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/utils.Page'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.KafkaConfig'
+  /adm/kafka/save:
+    post:
+      consumes:
+      - application/json
+      description: this is desc
+      parameters:
+      - description: Name of the kafka config
+        in: body
+        name: name
+        required: true
+        schema:
+          $ref: '#/definitions/models.KafkaConfig'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: token
+              type: string
+          schema:
+            $ref: '#/definitions/models.KafkaConfig'
+swagger: "2.0"

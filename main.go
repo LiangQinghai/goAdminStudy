@@ -4,8 +4,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	"goAdminStudy/config"
+	_ "goAdminStudy/docs"
 	"goAdminStudy/route"
+	"goAdminStudy/validator"
 	"log"
 	"net/http"
 	"os"
@@ -13,9 +16,14 @@ import (
 	"time"
 )
 
+// @title api
+// @version 1.0
+// @description admin
+//
 func main() {
 
 	gin.SetMode(gin.DebugMode)
+	binding.Validator = new(validator.NewValidator)
 
 	engine := route.InitRoute()
 

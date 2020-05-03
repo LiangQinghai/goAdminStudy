@@ -6,15 +6,36 @@ import (
 	"goAdminStudy/config"
 	"io"
 	"os"
+	"strings"
 )
 
 var logger *logrus.Logger
+
+var DefaultLogFile = "./static/log.log"
 
 func init() {
 
 	logger = logrus.New()
 	// 日志文件配置
-	file, err := os.OpenFile(config.LogConfig.GetFileName(), os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.FileMode(0666))
+	name := config.LogConfig.GetFileName()
+	if name != "" {
+		DefaultLogFile = name
+	}
+	var lastIndex int = 0
+	for index, s := range DefaultLogFile {
+		if s == '/' || s == '\\' {
+			lastIndex = index
+		}
+	}
+	path := DefaultLogFile[0:lastIndex]
+	path = strings.ReplaceAll(path, "/", string(os.PathSeparator))
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		err = os.MkdirAll(path, os.FileMode(06666))
+		if err != nil {
+			fmt.Printf("%v \n", err)
+		}
+	}
+	file, err := os.OpenFile(DefaultLogFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.FileMode(0666))
 
 	if err != nil {
 		fmt.Println("log error: ", err)

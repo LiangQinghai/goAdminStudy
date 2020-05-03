@@ -1,4 +1,4 @@
-package modules
+package models
 
 import (
 	"github.com/jinzhu/gorm"
@@ -9,9 +9,9 @@ import (
 
 // 用户
 type User struct {
-	UserName string `json:"user_name";gorm:"UNIQUE;Type:varchar(100);not_null"`
-	Password string `json:"password";gorm:"type:varchar(100);not_null"`
-	Status   int    `json:"status";gorm:"type:tinyint(2);not_null;DEFAULT:0;comment:'0->enable, 1->disable, 2->delete'"`
+	UserName string `json:"user_name" gorm:"UNIQUE;Type:varchar(100);not null"`
+	Password string `json:"password" gorm:"type:varchar(100);not null"`
+	Status   int    `json:"status" gorm:"type:tinyint(2);not null;default:0;comment:'0->enable, 1->disable, 2->delete'"`
 	BaseModule
 }
 
